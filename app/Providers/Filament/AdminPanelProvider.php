@@ -29,6 +29,11 @@ use Filament\Http\Middleware\IdentifyTenant; // Filament's tenant identifier
 use App\Http\Middleware\ApplyTenantScopes; // Your custom tenant scope middleware
 use App\Filament\Widgets\TenantStatsOverview; // <-- CORRECT Namespace
 use App\Filament\Widgets\RecentTenantArtworks; // <-- CORRECT Namespace
+// use App\Filament\Widgets\TenantArtworkStat;
+// use App\Filament\Widgets\TenantCategoryChart;
+// use App\Filament\Widgets\TenantPriceChart;
+// use App\Filament\Widgets\TenantCategoryValueChart; // <-- Import new widget
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -62,6 +67,10 @@ class AdminPanelProvider extends PanelProvider
                 // Widgets\FilamentInfoWidget::class,
                 TenantStatsOverview::class,
                 RecentTenantArtworks::class,
+                // TenantArtworkStat::class,
+                // TenantCategoryChart::class,
+                // TenantCategoryValueChart::class,
+                // TenantPriceChart::class,
             ])
 
             // --- Multi-Tenancy Configuration ---

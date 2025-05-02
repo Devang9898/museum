@@ -48,4 +48,5 @@ class TenantSelector extends Widget
 
      // Make widget appear higher on the dashboard
      protected static ?int $sort = -3; // Use negative numbers to place higher
+     
 }
