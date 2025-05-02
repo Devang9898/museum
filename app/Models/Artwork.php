@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -11,7 +10,6 @@ class Artwork extends Model
 {
     use HasFactory, HasUuids;
 
-    // Specify the primary key type if it's not auto-incrementing
     public $incrementing = false;
     protected $keyType = 'string';
 
@@ -20,16 +18,17 @@ class Artwork extends Model
         'category_id',
         'title',
         'image',
+        'length',
+        'breadth',
+        'price',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
     protected $casts = [
-        'id' => 'string', // Cast UUID to string
-        'tenant_id' => 'string', // Cast tenant_id UUID to string
+        'id' => 'string',
+        'tenant_id' => 'string',
+        'length' => 'decimal:2',
+        'breadth' => 'decimal:2',
+        'price' => 'decimal:2',
     ];
 
     /**

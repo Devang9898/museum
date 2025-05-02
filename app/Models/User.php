@@ -2,47 +2,47 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser; // Import
+use Filament\Panel; // Import
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser // Implement FilamentUser
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'is_super_admin', // Add
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected function casts(): array // Use method for casts in newer Laravel
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_super_admin' => 'boolean', // Add cast
         ];
+    }
+
+    // Implement canAccessPanel for Filament
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // Only allow access to the 'superadmin' panel if is_super_admin is true
+        if ($panel->getId() === 'superadmin') {
+            return $this->is_super_admin;
+        }
+
+        // Deny access to other panels (like 'admin') by default for this User model
+        // Or add logic for other panels if needed
+        return false;
     }
 }

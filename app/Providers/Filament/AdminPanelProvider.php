@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession; // Needed for authMiddlew
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+
 // Custom Page for Registration
 use App\Filament\Pages\RegisterTenant; // Import your custom registration page
 
@@ -26,7 +27,8 @@ use App\Filament\Pages\RegisterTenant; // Import your custom registration page
 use App\Models\Tenant;
 use Filament\Http\Middleware\IdentifyTenant; // Filament's tenant identifier
 use App\Http\Middleware\ApplyTenantScopes; // Your custom tenant scope middleware
-
+use App\Filament\Widgets\TenantStatsOverview; // <-- CORRECT Namespace
+use App\Filament\Widgets\RecentTenantArtworks; // <-- CORRECT Namespace
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -58,6 +60,8 @@ class AdminPanelProvider extends PanelProvider
                 // Register default or custom widgets here
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
+                TenantStatsOverview::class,
+                RecentTenantArtworks::class,
             ])
 
             // --- Multi-Tenancy Configuration ---

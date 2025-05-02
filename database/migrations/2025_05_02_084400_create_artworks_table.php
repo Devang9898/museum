@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('artworks', function (Blueprint $table) {
             $table->uuid('id')->primary(); // UUID Primary Key
-            // Ensure tenant_id is UUID type and references the tenants table's id
+
+            // Foreign key for tenant
             $table->foreignUuid('tenant_id')->constrained('tenants')->cascadeOnDelete();
-            // Foreign key for category (assuming INT id for categories)
-            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete(); // Allow null, set null if category deleted
+
+            // Foreign key for category
+            $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+
             $table->string('title');
             $table->string('image')->nullable(); // Path or URL to the image
+
+            // New fields for dimensions and price
+            $table->decimal('length', 8, 2)->nullable();   // Length in cm/inches
+            $table->decimal('breadth', 8, 2)->nullable();  // Breadth in cm/inches
+            $table->decimal('price', 12, 2)->nullable();   // Price of the artwork
+
             $table->timestamps(); // created_at, updated_at
         });
     }
@@ -31,3 +40,4 @@ return new class extends Migration
         Schema::dropIfExists('artworks');
     }
 };
+
