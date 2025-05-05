@@ -56,7 +56,7 @@ This demo utilizes a **shared database** approach with tenant isolation achieved
 ![Tenant Admin Dashboard](public/images/tenant2_3.png)
 
 ### 🖼️ Tenant Artwork Category Management 
-![Tenant Artwork List/View](public/images/tenant2_5create.png)
+![Tenant Artwork List/View](public/images/tenant2_5_create.png)
 
 ### 🖼️ Tenant Artwork Management 
 ![Tenant Artwork List/View](public/images/tenant2_2.png)
