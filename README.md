@@ -46,27 +46,29 @@ This demo utilizes a **shared database** approach with tenant isolation achieved
 
 <!-- Create a directory like .github/images/ or docs/images/ -->
 <!-- Add your screenshots and update the paths below -->
+### 🔑 Tenant Admin Login
+![Tenant Login Page](public/images/tenant_login.png)
 
-### 🔑 Tenant Admin Login (`/admin/login`)
-![Tenant Admin Login Page](.github/images/tenant-login.png)
+### ✍️ Tenant Registration 
+![Tenant Registration Page](public/images/tenant_registration.png)
 
-### ✍️ Tenant Registration (`/admin/register`)
-![Tenant Registration Page](.github/images/tenant-register.png)
+### 📊 Tenant Admin Dashboard 
+![Tenant Admin Dashboard](public/images/tenant2_3.png)
 
-### 📊 Tenant Admin Dashboard (`/admin`)
-![Tenant Admin Dashboard](.github/images/tenant-dashboard.png)
+### 🖼️ Tenant Artwork Management 
+![Tenant Artwork List/View](public/images/tenant2_1.png)
 
-### 🖼️ Tenant Artwork Management (`/admin/artworks`)
-![Tenant Artwork List/View](.github/images/tenant-artwork-list.png)
+### 🖼️ Tenant Artwork Management 
+![Tenant Artwork List/View](public/images/tenant2_1.png)
 
 ### 🔒 Super Admin Login (`/superadmin/login`)
-![Super Admin Login Page](.github/images/superadmin-login.png)
+![Super Admin Login Page](public/images/tenant_login.png)
 
 ### 🌍 Super Admin Dashboard (`/superadmin` - Global View)
-![Super Admin Dashboard - Global](.github/images/superadmin-dashboard-global.png)
+![Super Admin Dashboard](public/images/superadmin.png)
 
-### 🏢 Super Admin Dashboard (`/superadmin` - Tenant Selected)
-![Super Admin Dashboard - Tenant Selected](.github/images/superadmin-dashboard-tenant.png)
+### 🏢 Super Admin Dashboard (Tenant Selected)
+![Super Admin Dashboard - Tenant Selected](public/images/tenant_specific.png)
 
 ---
 
