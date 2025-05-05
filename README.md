@@ -61,6 +61,9 @@ This demo utilizes a **shared database** approach with tenant isolation achieved
 ### 🖼️ Tenant Artwork Management 
 ![Tenant Artwork List/View](public/images/tenant2_2.png)
 
+### 🖼️ Tenant Artwork Management 
+![Tenant Artwork List/View](public/images/tenant2_4create.png)
+
 ### 🔒 Super Admin Login (`/superadmin/login`)
 ![Super Admin Login Page](public/images/superadmin_login.png)
 
