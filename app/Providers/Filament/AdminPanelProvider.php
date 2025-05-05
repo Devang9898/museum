@@ -30,9 +30,9 @@ use App\Http\Middleware\ApplyTenantScopes; // Your custom tenant scope middlewar
 use App\Filament\Widgets\TenantStatsOverview; // <-- CORRECT Namespace
 use App\Filament\Widgets\RecentTenantArtworks; // <-- CORRECT Namespace
 // use App\Filament\Widgets\TenantArtworkStat;
-// use App\Filament\Widgets\TenantCategoryChart;
-// use App\Filament\Widgets\TenantPriceChart;
-// use App\Filament\Widgets\TenantCategoryValueChart; // <-- Import new widget
+//use App\Filament\Widgets\TenantCategoryChart;
+use App\Filament\Widgets\TenantPriceChart;
+//use App\Filament\Widgets\TenantCategoryValueChart; // <-- Import new widget
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -68,9 +68,9 @@ class AdminPanelProvider extends PanelProvider
                 TenantStatsOverview::class,
                 RecentTenantArtworks::class,
                 // TenantArtworkStat::class,
-                // TenantCategoryChart::class,
-                // TenantCategoryValueChart::class,
-                // TenantPriceChart::class,
+                //TenantCategoryChart::class,
+                //TenantCategoryValueChart::class,
+                TenantPriceChart::class,
             ])
 
             // --- Multi-Tenancy Configuration ---
