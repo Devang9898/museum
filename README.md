@@ -1,61 +1,283 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🖼️ Multi-Tenant Art Gallery (Filament Demo)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a demonstration of building a multi-tenant application using Laravel 11 and Filament v3. It simulates an art gallery platform where different organizations (Museums) can register and manage their own artworks and categories through a dedicated admin panel, while a Super Admin can oversee the entire system using a separate panel.
 
-## About Laravel
+This demo utilizes a **shared database** approach with tenant isolation achieved via `tenant_id` columns.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Tenant Admin Panel (`/admin`):**
+*   🔐 **Secure Tenant Login:** Dedicated login for administrators of specific organizations (`TenantAdmin` model).
+*   🖼️ **Artwork Management:** Full CRUD operations for artworks belonging *only* to the logged-in tenant.
+*   🏷️ **Category Management:** Full CRUD operations for categories belonging *only* to the logged-in tenant.
+*   📊 **Tenant Dashboard:** Displays statistics and charts relevant *only* to the tenant's data (Total Artworks, Category Distribution Pie Chart, Price Distribution Line Chart, Category Value Pie Chart).
+*   🏢 **Automatic Scoping:** Resources and data are automatically filtered based on the current tenant context.
 
-## Learning Laravel
+**Super Admin Panel (`/superadmin`):**
+*   👑 **Secure Super Admin Login:** Separate login for system administrators (`User` model with `is_super_admin` flag).
+*   🌍 **Global Overview:** Dashboard widgets summarizing key information across *all* tenants (Total Organizations, Total Tenant Admins, Total Artworks, Total Categories, Value/Distribution Charts).
+*   🔍 **Tenant Context Switching:** A dropdown allows the Super Admin to select a specific tenant and view contextual stats, charts, and recent artworks for *just that tenant* on the dashboard.
+*   **(Optional) User/Tenant Management:** Can be extended with Filament Resources to allow Super Admins to manage Tenants and potentially Tenant Admins directly (not explicitly implemented in this base demo).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**General:**
+*   🏢 **Multi-Tenancy (Shared DB):** Demonstrates the shared database model with `tenant_id` scoping.
+*   ✍️ **Tenant Self-Registration:** Organizations can register themselves and create their initial admin user via `/admin/register`.
+*   ⚡ **Modern Stack:** Built with Laravel 11 & PHP 8.2+.
+*   🎨 **Admin UI:** Clean and efficient admin interfaces powered by Filament v3.
+*   📱 **Responsive Design:** Accessible on various devices.
+*   🔑 **UUIDs:** Uses UUIDs for primary keys where appropriate (`tenants`, `tenant_admins`, `artworks`).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🏗️ Tech Stack
 
-## Laravel Sponsors
+*   **Framework**: Laravel 11 (PHP 8.2+)
+*   **Admin Panel**: Filament v3 (Panels, Forms, Tables, Widgets, Actions, Infolists)
+*   **Database**: MySQL / PostgreSQL (Configurable)
+*   **Frontend (Admin)**: Livewire, Alpine.js (via Filament)
+*   **Styling**: Tailwind CSS (via Filament)
+*   **Asset Bundling**: Vite
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 📸 Screenshots
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+<!-- Create a directory like .github/images/ or docs/images/ -->
+<!-- Add your screenshots and update the paths below -->
+### 🔑 Tenant Admin Login
+![Tenant Login Page](public/images/tenant_login.png)
 
-## Contributing
+### ✍️ Tenant Registration 
+![Tenant Registration Page](public/images/tenant_registration.png)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 📊 Tenant Admin Dashboard 
+![Tenant Admin Dashboard](public/images/tenant2_3.png)
 
-## Code of Conduct
+### 🖼️ Tenant Artwork Management 
+![Tenant Artwork List/View](public/images/tenant2_1.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 🖼️ Tenant Artwork Management 
+![Tenant Artwork List/View](public/images/tenant2_1.png)
 
-## Security Vulnerabilities
+### 🔒 Super Admin Login (`/superadmin/login`)
+![Super Admin Login Page](public/images/tenant_login.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 🌍 Super Admin Dashboard (`/superadmin` - Global View)
+![Super Admin Dashboard](public/images/superadmin.png)
 
-## License
+### 🏢 Super Admin Dashboard (Tenant Selected)
+![Super Admin Dashboard - Tenant Selected](public/images/tenant_specific.png)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🛠️ Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/[your-username]/[your-repo-name].git multi-tenant-gallery
+    cd multi-tenant-gallery
+    ```
+
+2.  **Install PHP Dependencies:**
+    ```bash
+    composer install
+    ```
+
+3.  **Install Node.js Dependencies & Build Assets:**
+    ```bash
+    npm install
+    npm run build # Or use 'npm run dev' for development
+    ```
+
+4.  **Set up Environment File:**
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+5.  **Configure Environment (`.env` file):**
+    Open the `.env` file and update:
+    *   `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` for your database setup.
+    *   `APP_URL` for your local development environment (e.g., `APP_URL=http://localhost:8000`).
+
+    ```env
+    APP_NAME="Multi-Tenant Gallery"
+    APP_ENV=local
+    APP_KEY=base64:... # Should be generated
+    APP_DEBUG=true
+    APP_URL=http://localhost:8000 # Set correctly
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=museum # Or your chosen DB name
+    DB_USERNAME=root
+    DB_PASSWORD= # Your password
+    ```
+
+6.  **Create Database:** Manually create the database specified in `DB_DATABASE` using your preferred database tool.
+
+7.  **Run Database Migrations & Seed:**
+    This command drops existing tables, runs all migrations (including adding `is_super_admin` to `users`), and executes `DemoDataSeeder` to create sample tenants, tenant admins, categories, and the super admin user.
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+    *(Warning: `migrate:fresh` deletes all data!)*
+
+8.  **Link Storage:**
+    Makes uploaded images publicly accessible.
+    ```bash
+    php artisan storage:link
+    ```
+
+9.  **Serve the Application:**
+    ```bash
+    php artisan serve
+    ```
+    Access the application at the URL provided (usually `http://localhost:8000`).
+
+---
+
+## ✨ Usage
+
+1.  **Tenant Registration:**
+    *   Go to `/admin/register`.
+    *   Fill in organization details, admin details, and password.
+    *   On success, you'll be logged in as the new Tenant Admin and redirected to `/admin`.
+
+2.  **Tenant Admin Login:**
+    *   Go to `/admin/login`.
+    *   Log in with credentials created during registration or seeded data:
+        *   `alice@moma.example.com` / `password`
+        *   `bob@nationalgallery.example.com` / `password`
+    *   The dashboard and resources (Artworks, Categories) will show data only for that tenant.
+
+3.  **Super Admin Login:**
+    *   Go to `/superadmin/login`.
+    *   Log in with seeded credentials:
+        *   `superadmin@example.com` / `password`
+    *   The dashboard shows global stats and a tenant selector. Use the selector to view data for specific tenants within the contextual widgets.
+
+---
+
+## 📁 Project Structure (Key Filament & App Areas)
+
+```text
+.
+├── app
+│   ├── Console
+│   ├── Exceptions
+│   ├── Filament                 # 'admin' panel components
+│   │   ├── Pages
+│   │   │   └── RegisterTenant.php
+│   │   ├── Resources
+│   │   │   ├── ArtworkResource
+│   │   │   │   └── Pages
+│   │   │   │       ├── CreateArtwork.php
+│   │   │   │       ├── EditArtwork.php
+│   │   │   │       └── ListArtworks.php
+│   │   │   ├── ArtworkResource.php
+│   │   │   ├── CategoryResource
+│   │   │   │   └── Pages
+│   │   │   │       ├── CreateCategory.php
+│   │   │   │       ├── EditCategory.php
+│   │   │   │       └── ListCategories.php
+│   │   │   └── CategoryResource.php
+│   │   └── Widgets              # 'admin' panel widgets
+│   │       ├── TenantArtworkStat.php
+│   │       ├── TenantCategoryChart.php
+│   │       ├── TenantCategoryValueChart.php
+│   │       └── TenantPriceChart.php
+│   ├── Http
+│   │   ├── Controllers
+│   │   └── Middleware
+│   ├── Models                   # Eloquent Models
+│   │   ├── Artwork.php
+│   │   ├── Category.php
+│   │   ├── Tenant.php
+│   │   ├── TenantAdmin.php
+│   │   └── User.php             # (Super Admin)
+│   ├── Policies
+│   ├── Providers
+│   │   ├── Filament               # Panel Providers
+│   │   │   ├── AdminPanelProvider.php
+│   │   │   └── SuperadminPanelProvider.php
+│   │   └── (...)                # Other Service Providers
+│   └── Superadmin               # 'superadmin' panel components
+│       ├── Pages                # (Empty unless custom pages added)
+│       ├── Resources            # (Empty unless resources added)
+│       └── Widgets              # 'superadmin' panel widgets
+│           ├── CategoryDistributionChart.php
+│           ├── ContextualRecentArtworks.php
+│           ├── ContextualStatsOverview.php
+│           ├── GlobalStatsOverview.php
+│           ├── TenantArtworkDistributionChart.php
+│           ├── TenantSelector.php
+│           └── TotalValuePerTenantChart.php
+├── bootstrap
+│   └── (...)
+├── config
+│   └── (...)
+├── database
+│   ├── factories
+│   ├── migrations               # Database Migrations
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── ..._create_tenants_table.php
+│   │   ├── ..._create_categories_table.php
+│   │   ├── ..._create_tenant_admins_table.php
+│   │   └── ..._create_artworks_table.php
+│   └── seeders                  # Database Seeders
+│       ├── DatabaseSeeder.php
+│       └── DemoDataSeeder.php
+├── public
+│   ├── build
+│   └── storage -> ../storage/app/public # Symlink
+├── resources
+│   ├── css
+│   ├── js
+│   └── views                    # Blade Views
+│       ├── filament
+│       │   ├── pages
+│       │   │   └── register-tenant.blade.php
+│       │   └── superadmin
+│       │       └── widgets
+│       │           └── tenant-selector.blade.php
+│       └── welcome.blade.php
+├── routes
+│   ├── api.php
+│   ├── channels.php
+│   ├── console.php
+│   └── web.php
+├── storage
+│   ├── app
+│   │   └── public
+│   │       └── artworks         # Uploaded artwork images
+│   ├── framework
+│   └── logs
+├── tests
+├── vendor
+├── .env.example
+├── .gitignore
+├── artisan
+├── composer.json
+├── package.json
+├── phpunit.xml
+├── vite.config.js
+└── README.md                    # This file!
+
+
+```
+
+
+## 🤝 Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+
+## 📄 License
+Distributed under the MIT License. See LICENSE file for more information.
